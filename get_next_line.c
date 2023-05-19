@@ -6,16 +6,11 @@
 /*   By: jareste- <jareste-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 00:02:45 by jareste-          #+#    #+#             */
-/*   Updated: 2023/05/19 23:57:22 by jareste-         ###   ########.fr       */
+/*   Updated: 2023/05/20 00:23:16 by jareste-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdlib.h>
-//#include <unistd.h>
 #include "get_next_line.h"
-#include <stdio.h>
-
-//#define BUFFER_SIZE 300
 
 char	*ft_free(char **buffer)
 {
