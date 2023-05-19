@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jareste- <jareste-@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 00:02:45 by jareste-          #+#    #+#             */
-/*   Updated: 2023/05/19 23:57:22 by jareste-         ###   ########.fr       */
+/*   Updated: 2023/05/19 23:56:39 by jareste-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdlib.h>
-//#include <unistd.h>
-#include "get_next_line.h"
-#include <stdio.h>
-
-//#define BUFFER_SIZE 300
+#include "get_next_line_bonus.h"
 
 char	*ft_free(char **buffer)
 {
@@ -88,19 +83,19 @@ char	*empty_prev_line(char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer = {0};
+	static char	*buffer[OPEN_MAX];
 	char		*line;
 
 	if (fd < 0)
 		return (NULL);
-	if (!buffer || (buffer && !ft_strchr(buffer, '\n')))
-		buffer = ft_find_line(fd, buffer);
-	if (!buffer)
+	if (!buffer[fd] || (buffer[fd] && !ft_strchr(buffer[fd], '\n')))
+		buffer[fd] = ft_find_line(fd, buffer[fd]);
+	if (!buffer[fd])
 		return (NULL);
-	line = new_line(buffer);
+	line = new_line(buffer[fd]);
 	if (!line)
-		return (ft_free(&buffer));
-	buffer = empty_prev_line(buffer);
+		return (ft_free(&buffer[fd]));
+	buffer[fd] = empty_prev_line(buffer[fd]);
 	return (line);
 }
 /*
